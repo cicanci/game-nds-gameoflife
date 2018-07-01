@@ -12,7 +12,7 @@ unsigned char** newUniv = NULL;
 void show(unsigned char** univ, int w, int h) {
     //system("clear");
     //printf("\033[H");
-    iprintf("\x1b[2J");
+    printf("\x1b[2J");
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
             //printf(univ[y][x] ? "\033[07m  \033[m" : "  ");
@@ -86,7 +86,7 @@ void game(int w, int h, unsigned char** univ, int cycles, int print_result, int 
     if (1 == print_result) {
         show(univ, w, h);
     }
-    //printf("Simulation completed after %d cycles.\n\n", cycles);
+   //printf("Simulation completed after %d cycles.\n\n", cycles);
 }
 
 unsigned char** random_univ(int w, int h) {
@@ -202,7 +202,7 @@ int main2(int c, char **v) {
 
 //---------------------------------------------------------------------------------
 int main(void) {
-    //---------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------
     touchPosition touch;
     
     PrintConsole topScreen;
@@ -221,38 +221,117 @@ int main(void) {
     
     nitroFSInit(NULL);
     
-    int w = 31;
-    int h = 23;
-    int time = 5;
+    int time = 10;
     int cycles = 100;
-    
-    //unsigned char** univ = random_univ(w, h);
-    unsigned char** univ = read_from_file("oscillator/pulsar.txt", &w, &h);
-    
-    game(w, h, univ, cycles, 1, time);
-    
+    unsigned char** univ = NULL;
+
     consoleSelect(&bottomScreen);
     
+    printf("-----------\t-----------\n");
+    printf("| BEACON  |\t| BLINKER |\n");
+    printf("-----------\t-----------\n");
+    printf("-----------\t-----------\n");
+    printf("| PULSAR  |\t| TOAD    |\n");
+    printf("-----------\t-----------\n");
+    printf("-----------\t-----------\n");
+    printf("| RANDOM  |\t| GLIDER  |\n");
+    printf("-----------\t-----------\n");
+    printf("-----------\t-----------\n");
+    printf("| BEEHIVE |\t| BLOCK   |\n");
+    printf("-----------\t-----------\n");
+    printf("-----------\t-----------\n");
+    printf("| BOAT    |\t| LOAF    |\n");
+    printf("-----------\t-----------\n");
+    
     while(1) {
-        
         touchRead(&touch);
+        printf("\x1b[20;0HTouch ( %04i, %04i )\n", touch.px, touch.py);
         
-        //printf("\x1b[10;0HTouch x = %04i, %04i\n", touch.rawx, touch.px);
-        //iprintf("Touch y = %04i, %04i\n", touch.rawy, touch.py);
-        
-        if(touch.px > 0) {
+        if(touch.px > 0 && touch.px < 90 && touch.py > 0 && touch.py < 25) {
             consoleSelect(&topScreen);
+            int w = 0, h = 0;
+            univ = read_from_file("oscillator/beacon.txt", &w, &h);
             game(w, h, univ, cycles, 1, time);
             consoleSelect(&bottomScreen);
         }
         
+        if(touch.px > 100 && touch.px < 190 && touch.py > 0 && touch.py < 25) {
+            consoleSelect(&topScreen);
+            int w = 0, h = 0;
+            univ = read_from_file("oscillator/blinker.txt", &w, &h);
+            game(w, h, univ, cycles, 1, time);
+            consoleSelect(&bottomScreen);
+        }
+        
+        if(touch.px > 0 && touch.px < 90 && touch.py > 25 && touch.py < 50) {
+            consoleSelect(&topScreen);
+            int w = 0, h = 0;
+            univ = read_from_file("oscillator/pulsar.txt", &w, &h);
+            game(w, h, univ, cycles, 1, time);
+            consoleSelect(&bottomScreen);
+        }
+        
+        if(touch.px > 100 && touch.px < 190 && touch.py > 25 && touch.py < 50) {
+            consoleSelect(&topScreen);
+            int w = 0, h = 0;
+            univ = read_from_file("oscillator/toad.txt", &w, &h);
+            game(w, h, univ, cycles, 1, time);
+            consoleSelect(&bottomScreen);
+        }
+        
+        if(touch.px > 0 && touch.px < 90 && touch.py > 50 && touch.py < 75) {
+            consoleSelect(&topScreen);
+            int w = 30, h = 20;
+            univ = random_univ(w, h);
+            game(w, h, univ, cycles, 1, time);
+            consoleSelect(&bottomScreen);
+        }
+        
+        if(touch.px > 100 && touch.px < 190 && touch.py > 50 && touch.py < 75) {
+            consoleSelect(&topScreen);
+            int w = 0, h = 0;
+            univ = read_from_file("complex/glidergun.txt", &w, &h);
+            game(w, h, univ, cycles, 1, time);
+            consoleSelect(&bottomScreen);
+        }
+        
+        if(touch.px > 0 && touch.px < 90 && touch.py > 75 && touch.py < 100) {
+            consoleSelect(&topScreen);
+            int w = 0, h = 0;
+            univ = read_from_file("stable/beehive.txt", &w, &h);
+            game(w, h, univ, cycles, 1, time);
+            consoleSelect(&bottomScreen);
+        }
+        
+        if(touch.px > 100 && touch.px < 190 && touch.py > 75 && touch.py < 100) {
+            consoleSelect(&topScreen);
+            int w = 0, h = 0;
+            univ = read_from_file("stable/block.txt", &w, &h);
+            game(w, h, univ, cycles, 1, time);
+            consoleSelect(&bottomScreen);
+        }
+        
+        if(touch.px > 0 && touch.px < 90 && touch.py > 100 && touch.py < 125) {
+            consoleSelect(&topScreen);
+            int w = 0, h = 0;
+            univ = read_from_file("stable/boat.txt", &w, &h);
+            game(w, h, univ, cycles, 1, time);
+            consoleSelect(&bottomScreen);
+        }
+        
+        if(touch.px > 100 && touch.px < 190 && touch.py > 100 && touch.py < 125) {
+            consoleSelect(&topScreen);
+            int w = 0, h = 0;
+            univ = read_from_file("stable/loaf.txt", &w, &h);
+            game(w, h, univ, cycles, 1, time);
+            consoleSelect(&bottomScreen);
+        }
+
         swiWaitForVBlank();
         scanKeys();
         
-        int keys = keysDown();
-        
-        if(keys & KEY_A) break;
-
+//        int keys = keysDown();
+//        if(keys & KEY_A) break;
     }
     
     return 0;
