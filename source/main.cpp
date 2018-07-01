@@ -1,4 +1,6 @@
 #include <nds.h>
+#include <filesystem.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -104,8 +106,8 @@ unsigned char** random_univ(int w, int h) {
     return univ;
 }
 
-unsigned char** read_from_file(char* filename, int* w, int* h) {
-    FILE* file = fopen(filename, "r");
+unsigned char** read_from_file(const char* filename, int* w, int* h) {
+    FILE* file = fopen(filename, "rb");
     char line[1024];
     
     if (file == NULL) {
@@ -217,11 +219,17 @@ int main(void) {
     
     consoleSelect(&topScreen);
     
+    nitroFSInit(NULL);
+    
     int w = 31;
     int h = 23;
     int time = 5;
     int cycles = 100;
-    game(w, h, random_univ(w, h), cycles, 1, time);
+    
+    //unsigned char** univ = random_univ(w, h);
+    unsigned char** univ = read_from_file("oscillator/pulsar.txt", &w, &h);
+    
+    game(w, h, univ, cycles, 1, time);
     
     consoleSelect(&bottomScreen);
     
@@ -234,7 +242,7 @@ int main(void) {
         
         if(touch.px > 0) {
             consoleSelect(&topScreen);
-            game(w, h, random_univ(w, h), cycles, 1, time);
+            game(w, h, univ, cycles, 1, time);
             consoleSelect(&bottomScreen);
         }
         

@@ -24,16 +24,16 @@ BUILD    := build
 SOURCES  := source
 INCLUDES := include
 DATA     :=
-GRAPHICS := data
+GRAPHICS :=
 AUDIO    :=
 ICON     :=
 
 # specify a directory which contains the nitro filesystem
 # this is relative to the Makefile
-NITRO    :=
+NITRO    := data
 
 # These set the information text in the nds file
-GAME_TITLE     := PONG
+GAME_TITLE     := GAME OF LIFE
 GAME_SUBTITLE1 := by Bruno Cicanci
 GAME_SUBTITLE2 := http://cicanci.com
 
