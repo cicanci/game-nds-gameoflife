@@ -5,10 +5,6 @@
 #include <time.h>
 #include <string.h>
 
-#include "background.h"
-#include "blue.h"
-#include "red.h"
-
 unsigned char** newUniv = NULL;
 
 void show(unsigned char** univ, int w, int h) {
@@ -220,9 +216,6 @@ int main(void) {
     consoleInit(&bottomScreen, 3, BgType_Text4bpp, BgSize_T_256x256, 31, 0, false, true);
     
     consoleSelect(&topScreen);
-//    iprintf("\n\n\tHello DS dev'rs\n");
-//    iprintf("\twww.drunkencoders.com\n");
-//    iprintf("\twww.devkitpro.org");
     
     int w = 31;
     int h = 23;
