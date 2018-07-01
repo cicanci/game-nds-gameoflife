@@ -201,7 +201,7 @@ int main2(int c, char **v) {
 }
 
 //---------------------------------------------------------------------------------
-int main(void) {
+int main(int argc, char **argv) {
 //---------------------------------------------------------------------------------
     touchPosition touch;
     
@@ -216,16 +216,13 @@ int main(void) {
     
     consoleInit(&topScreen, 3, BgType_Text4bpp, BgSize_T_256x256, 31, 0, true, true);
     consoleInit(&bottomScreen, 3, BgType_Text4bpp, BgSize_T_256x256, 31, 0, false, true);
-    
+
     consoleSelect(&topScreen);
-    
-    nitroFSInit(NULL);
+    consoleSelect(&bottomScreen);
     
     int time = 10;
     int cycles = 100;
     unsigned char** univ = NULL;
-
-    consoleSelect(&bottomScreen);
     
     printf("-----------\t-----------\n");
     printf("| BEACON  |\t| BLINKER |\n");
@@ -242,6 +239,8 @@ int main(void) {
     printf("-----------\t-----------\n");
     printf("| BOAT    |\t| LOAF    |\n");
     printf("-----------\t-----------\n");
+    
+    nitroFSInit(NULL);
     
     while(1) {
         touchRead(&touch);
@@ -330,8 +329,8 @@ int main(void) {
         swiWaitForVBlank();
         scanKeys();
         
-//        int keys = keysDown();
-//        if(keys & KEY_A) break;
+        int keys = keysDown();
+        if(keys & KEY_START) break;
     }
     
     return 0;
