@@ -1,0 +1,5 @@
+# devkitPro
+
+*.elf
+*.nds
+build/
