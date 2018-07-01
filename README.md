@@ -1,6 +1,6 @@
-# NDS PONG
+# NDS Conway's Game of Life
 
-Pong using [devkitPro](https://devkitpro.org/) for Nintendo DS.
+[Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) using [devkitPro](https://devkitpro.org/) for Nintendo DS.
 
 ## Tools
 
